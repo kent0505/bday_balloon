@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'src/blocs/friend/friend_bloc.dart';
-import 'src/blocs/gift/gift_bloc.dart';
-import 'src/blocs/guest/guest_bloc.dart';
-import 'src/blocs/profile/profile_bloc.dart';
+import 'src/controllers/friend/friend_bloc.dart';
+import 'src/controllers/gift/gift_bloc.dart';
+import 'src/controllers/guest/guest_bloc.dart';
+import 'src/controllers/profile/profile_bloc.dart';
 import 'src/database/database.dart';
 import 'src/screens/splash_screen.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../blocs/guest/guest_bloc.dart';
+import '../controllers/guest/guest_bloc.dart';
 import '../utils.dart';
 import '../database/guest.dart';
 import '../widgets/add_photo_button.dart';
@@ -163,7 +163,7 @@ class _GuestAddScreenState extends State<GuestAddScreen> {
           PageTitle(
             title: 'Add Guest',
             back: true,
-            onDelete: onDelete,
+            onDelete: widget.guest == null ? null : onDelete,
           ),
           Expanded(
             child: ListView(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/gift/gift_bloc.dart';
+import '../controllers/gift/gift_bloc.dart';
 import '../widgets/btn.dart';
 import '../widgets/gift_card.dart';
 import '../widgets/page_title.dart';

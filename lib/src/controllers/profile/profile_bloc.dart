@@ -13,7 +13,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       String name = prefs.getString('name') ?? '';
       String surname = prefs.getString('surname') ?? '';
       String birth = prefs.getString('birth') ?? '';
-
       emit(ProfileLoaded(
         image: image,
         name: name,

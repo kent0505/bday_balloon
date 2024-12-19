@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../blocs/guest/guest_bloc.dart';
+import '../controllers/guest/guest_bloc.dart';
 import '../widgets/btn.dart';
 import '../widgets/guest_card.dart';
 import '../widgets/page_title.dart';

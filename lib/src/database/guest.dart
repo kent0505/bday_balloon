@@ -24,7 +24,7 @@ class Guest {
   List<String> emails;
 }
 
-class GuestAdapter extends TypeAdapter<Guest> {
+class GuestAdap extends TypeAdapter<Guest> {
   @override
   final typeId = 2;
 

@@ -22,7 +22,7 @@ class Friend {
   List<String> phones;
 }
 
-class FriendAdapter extends TypeAdapter<Friend> {
+class FriendAdap extends TypeAdapter<Friend> {
   @override
   final typeId = 1;
 

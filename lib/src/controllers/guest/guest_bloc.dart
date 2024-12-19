@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../database/database.dart';
 import '../../database/guest.dart';
-import '../../utils.dart';
 
 part 'guest_event.dart';
 part 'guest_state.dart';
@@ -22,7 +21,6 @@ class GuestBloc extends Bloc<GuestEvent, GuestState> {
 
   void _get(GuestGet event, Emitter<GuestState> emit) async {
     List<Guest> guests = await getGuests();
-    logger(guests.length);
     emit(GuestLoaded(guests: guests));
   }
 

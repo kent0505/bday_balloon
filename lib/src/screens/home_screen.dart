@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/bottom/bottom_bloc.dart';
-import '../blocs/friend/friend_bloc.dart';
-import '../blocs/gift/gift_bloc.dart';
-import '../blocs/profile/profile_bloc.dart';
+import '../controllers/bottom/bottom_bloc.dart';
+import '../controllers/friend/friend_bloc.dart';
+import '../controllers/gift/gift_bloc.dart';
+import '../controllers/profile/profile_bloc.dart';
 import '../utils.dart';
 import '../widgets/birth_timer.dart';
 import '../widgets/bottom_widget.dart';
@@ -13,6 +13,7 @@ import '../widgets/image_widget.dart';
 import '../widgets/scaffold2.dart';
 import 'friend_add_screen.dart';
 import 'friends_screen.dart';
+import 'gift_add_screen.dart';
 import 'gifts_screen.dart';
 import 'guests_screen.dart';
 import 'settings_screen.dart';
@@ -179,27 +180,41 @@ class HomeScreen extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: state.gifts.length,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    width: 52,
-                                    margin: EdgeInsets.only(right: 16),
-                                    child: Column(
-                                      children: [
-                                        ImageWidget(
-                                          image: state.gifts[index].image,
-                                          height: 52,
+                                  return Btn(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return GiftAddScreen(
+                                              gift: state.gifts[index],
+                                            );
+                                          },
                                         ),
-                                        SizedBox(height: 2),
-                                        Text(
-                                          state.gifts[index].title,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontFamily: 'w800',
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 52,
+                                      margin: EdgeInsets.only(right: 16),
+                                      child: Column(
+                                        children: [
+                                          ImageWidget(
+                                            image: state.gifts[index].image,
+                                            height: 52,
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(height: 2),
+                                          Text(
+                                            state.gifts[index].title,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: 'w800',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },

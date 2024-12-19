@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../database/database.dart';
 import '../../database/gift.dart';
-import '../../utils.dart';
 
 part 'gift_event.dart';
 part 'gift_state.dart';
@@ -22,7 +21,6 @@ class GiftBloc extends Bloc<GiftEvent, GiftState> {
 
   void _get(GiftGet event, Emitter<GiftState> emit) async {
     List<Gift> gifts = await getGifts();
-    logger(gifts.length);
     emit(GiftLoaded(gifts: gifts));
   }
 

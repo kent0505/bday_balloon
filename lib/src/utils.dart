@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'database/friend.dart';
@@ -36,7 +34,7 @@ String formatTimestamp(int timestamp) {
 String calculateAge(String birth) {
   DateTime birthDate = stringToDate(birth);
   DateTime today = DateTime.now();
-  int age = today.year - birthDate.year;
+  int age = today.year - birthDate.year + 1;
   if (today.month < birthDate.month ||
       (today.month == birthDate.month && today.day < birthDate.day)) {
     age--;
@@ -74,8 +72,6 @@ String convertDate(String date) {
   return formattedDate;
 }
 
-void logger(Object message) => developer.log(message.toString());
-
 bool getActive(List<String> strings) {
   for (String string in strings) {
     if (string.isEmpty) return false;
@@ -89,7 +85,6 @@ Future<XFile> pickImage() async {
     if (image == null) return XFile('');
     return image;
   } catch (e) {
-    logger(e);
     return XFile('');
   }
 }

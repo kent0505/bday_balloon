@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../blocs/gift/gift_bloc.dart';
+import '../controllers/gift/gift_bloc.dart';
 import '../database/gift.dart';
 import '../screens/gift_add_screen.dart';
 import 'btn.dart';

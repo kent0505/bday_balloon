@@ -49,8 +49,9 @@ class _BirthTimerState extends State<BirthTimer> {
     int minutes = duration.inMinutes % 60;
     int seconds = duration.inSeconds % 60;
 
-    List<int> dayDigits =
-        days.toString().padLeft(3, '0').split('').map(int.parse).toList();
+    List<int> dayDigits = days < 100
+        ? days.toString().padLeft(2, '0').split('').map(int.parse).toList()
+        : days.toString().padLeft(3, '0').split('').map(int.parse).toList();
 
     return [
       ...dayDigits,
@@ -76,43 +77,90 @@ class _BirthTimerState extends State<BirthTimer> {
   Widget build(BuildContext context) {
     List<int> digits = getDigits(remainingTime);
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: digits.map((number) {
-        double spacing;
-        if (number == -1) {
-          if (digits.indexOf(number) < 3) {
-            spacing = 2;
-          } else if (digits.indexOf(number) < 6) {
-            spacing = 12;
-          } else {
-            spacing = 12;
-          }
-          return SizedBox(width: spacing);
-        } else {
-          return Padding(
-            padding: EdgeInsets.only(right: 4),
-            child: Container(
-              width: 32,
-              height: 48,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(width: 15),
+            Text(
+              'Days',
+              style: TextStyle(
                 color: Colors.white,
-              ),
-              child: Center(
-                child: Text(
-                  number.toString(),
-                  style: TextStyle(
-                    color: Color(0xff424242),
-                    fontSize: 34,
-                    fontFamily: 'w800',
-                  ),
-                ),
+                fontSize: 12,
+                fontFamily: 'w800',
               ),
             ),
-          );
-        }
-      }).toList(),
+            SizedBox(width: 50),
+            Text(
+              'Hours',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontFamily: 'w800',
+              ),
+            ),
+            SizedBox(width: 40),
+            Text(
+              'Minutes',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontFamily: 'w800',
+              ),
+            ),
+            SizedBox(width: 30),
+            Text(
+              'Seconds',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontFamily: 'w800',
+              ),
+            ),
+            SizedBox(width: 15),
+          ],
+        ),
+        SizedBox(height: 4),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: digits.map((number) {
+            double spacing;
+            if (number == -1) {
+              if (digits.indexOf(number) < 3) {
+                spacing = 2;
+              } else if (digits.indexOf(number) < 6) {
+                spacing = 12;
+              } else {
+                spacing = 12;
+              }
+              return SizedBox(width: spacing);
+            } else {
+              return Padding(
+                padding: EdgeInsets.only(right: 4),
+                child: Container(
+                  width: 32,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+                  child: Center(
+                    child: Text(
+                      number.toString(),
+                      style: TextStyle(
+                        color: Color(0xff424242),
+                        fontSize: 34,
+                        fontFamily: 'w800',
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+          }).toList(),
+        ),
+      ],
     );
   }
 }

@@ -26,6 +26,7 @@ class ImageWidget extends StatelessWidget {
           width: height,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
+            print(error);
             return asset.isEmpty
                 ? Container(
                     height: height,

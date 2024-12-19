@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../utils.dart';
-import '../blocs/profile/profile_bloc.dart';
+import '../controllers/profile/profile_bloc.dart';
 import '../widgets/add_photo_button.dart';
 import '../widgets/button.dart';
 import '../widgets/field.dart';

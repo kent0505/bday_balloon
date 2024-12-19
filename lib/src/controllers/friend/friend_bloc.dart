@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../database/database.dart';
 import '../../database/friend.dart';
-import '../../utils.dart';
 
 part 'friend_event.dart';
 part 'friend_state.dart';
@@ -22,7 +21,6 @@ class FriendBloc extends Bloc<FriendEvent, FriendState> {
 
   void _get(FriendGet event, Emitter<FriendState> emit) async {
     List<Friend> friends = await getFriends();
-    logger(friends.length);
     emit(FriendLoaded(friends: friends));
   }
 

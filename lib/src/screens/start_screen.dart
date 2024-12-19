@@ -138,7 +138,7 @@ class _StartScreenState extends State<StartScreen> {
                 onPressed: () async {
                   if (first) {
                     setState(() {
-                      first = true;
+                      first = false;
                     });
                   } else {
                     final prefs = await SharedPreferences.getInstance();

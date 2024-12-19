@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../blocs/bottom/bottom_bloc.dart';
+import '../controllers/bottom/bottom_bloc.dart';
 import 'btn.dart';
 
 class BottomWidget extends StatelessWidget {
@@ -13,33 +13,16 @@ class BottomWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        // padding: const EdgeInsets.symmetric(horizontal: 30),
         margin: EdgeInsets.only(bottom: 34),
         child: BlocBuilder<BottomBloc, BottomState>(
           builder: (context, state) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _Bottom(
-                  id: 1,
-                  title: 'Home',
-                  active: state is BottomInitial,
-                ),
-                _Bottom(
-                  id: 2,
-                  title: '2',
-                  active: state is BottomGuests,
-                ),
-                _Bottom(
-                  id: 3,
-                  title: '3',
-                  active: state is BottomGifts,
-                ),
-                _Bottom(
-                  id: 4,
-                  title: '4',
-                  active: state is BottomSettings,
-                ),
+                _Bottom(id: 1, title: 'Home', active: state is BottomInitial),
+                _Bottom(id: 2, title: '2', active: state is BottomGuests),
+                _Bottom(id: 3, title: '3', active: state is BottomGifts),
+                _Bottom(id: 4, title: '4', active: state is BottomSettings),
               ],
             );
           },

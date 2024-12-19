@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../blocs/friend/friend_bloc.dart';
+import '../controllers/friend/friend_bloc.dart';
 import '../database/friend.dart';
 import '../screens/friend_add_screen.dart';
 import '../utils.dart';

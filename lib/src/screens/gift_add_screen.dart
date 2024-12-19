@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../blocs/gift/gift_bloc.dart';
+import '../controllers/gift/gift_bloc.dart';
 import '../database/gift.dart';
 import '../utils.dart';
 import '../widgets/add_photo_button.dart';

@@ -18,7 +18,7 @@ class Gift {
   String notes;
 }
 
-class GiftAdapter extends TypeAdapter<Gift> {
+class GiftAdap extends TypeAdapter<Gift> {
   @override
   final typeId = 0;
 

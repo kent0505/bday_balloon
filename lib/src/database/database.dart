@@ -7,9 +7,9 @@ import 'guest.dart';
 Future<void> initHive() async {
   await Hive.initFlutter();
   // await Hive.deleteBoxFromDisk('bday_balloon');
-  Hive.registerAdapter(GiftAdapter());
-  Hive.registerAdapter(FriendAdapter());
-  Hive.registerAdapter(GuestAdapter());
+  Hive.registerAdapter(GiftAdap());
+  Hive.registerAdapter(FriendAdap());
+  Hive.registerAdapter(GuestAdap());
 }
 
 Future<List<Gift>> getGifts() async {

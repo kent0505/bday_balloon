@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../blocs/friend/friend_bloc.dart';
+import '../controllers/friend/friend_bloc.dart';
 import '../widgets/btn.dart';
 import '../widgets/friend_card.dart';
 import '../widgets/page_title.dart';

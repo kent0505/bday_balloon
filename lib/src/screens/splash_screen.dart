@@ -56,6 +56,9 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold2(
       body: Center(
+        // child: CupertinoActivityIndicator(
+        //   radius: 16,
+        // ),
         child: RotationTransition(
           turns: turns,
           child: SvgPicture.asset(

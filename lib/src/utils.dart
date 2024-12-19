@@ -2,6 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'database/friend.dart';
 
 int getTimestamp() => DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
@@ -41,6 +42,36 @@ String calculateAge(String birth) {
     age--;
   }
   return age.toString();
+}
+
+List<Friend> sortIncomingBirthdays(List<Friend> friends) {
+  return friends
+    ..sort((a, b) {
+      DateTime dateA = stringToDate(a.birth);
+      DateTime dateB = stringToDate(b.birth);
+      return dateA.month.compareTo(dateB.month);
+    });
+}
+
+String convertDate(String date) {
+  DateTime parsedDate = DateFormat('MMM dd yyyy').parse(date);
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  final String month = monthNames[parsedDate.month - 1];
+  final String formattedDate = "$month - ${parsedDate.day}";
+  return formattedDate;
 }
 
 void logger(Object message) => developer.log(message.toString());

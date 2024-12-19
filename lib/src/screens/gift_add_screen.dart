@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../blocs/gift/gift_bloc.dart';
 import '../database/gift.dart';
 import '../utils.dart';
+import '../widgets/add_photo_button.dart';
 import '../widgets/btn.dart';
 import '../widgets/button.dart';
 import '../widgets/field.dart';
@@ -103,6 +104,12 @@ class _GiftAddScreenState extends State<GiftAddScreen> {
   @override
   void dispose() {
     controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    controller4.dispose();
+    for (var description in descriptions) {
+      description.dispose();
+    }
     super.dispose();
   }
 
@@ -124,28 +131,7 @@ class _GiftAddScreenState extends State<GiftAddScreen> {
                     ? SvgPicture.asset('assets/no_image.svg')
                     : ImageWidget(image: controller2.text),
                 SizedBox(height: 25),
-                Btn(
-                  onPressed: onPickImage,
-                  minSize: 24,
-                  child: Container(
-                    height: 24,
-                    width: 118,
-                    decoration: BoxDecoration(
-                      color: Color(0xffDD0474),
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Add photo',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontFamily: 'w800',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                AddPhotoButton(onPressed: onPickImage),
                 SizedBox(height: 22),
                 Container(
                   height: 94,
@@ -160,7 +146,7 @@ class _GiftAddScreenState extends State<GiftAddScreen> {
                       Container(
                         height: 1,
                         margin: EdgeInsets.symmetric(horizontal: 22),
-                        color: Colors.white,
+                        color: Color(0xffD9D9D9).withValues(alpha: 0.5),
                       ),
                       SizedBox(height: 10),
                       Field(

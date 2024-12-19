@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/blocs/gift/gift_bloc.dart';
 import 'src/blocs/guest/guest_bloc.dart';
+import 'src/blocs/profile/profile_bloc.dart';
 import 'src/database/database.dart';
 import 'src/screens/splash_screen.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => GiftBloc()..add(GiftGet())),
         BlocProvider(create: (context) => GuestBloc()),
+        BlocProvider(create: (context) => ProfileBloc()..add(ProfileGet())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

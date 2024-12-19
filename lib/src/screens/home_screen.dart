@@ -1,10 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/bottom/bottom_bloc.dart';
+import '../blocs/profile/profile_bloc.dart';
 import '../widgets/bottom_widget.dart';
+import '../widgets/image_widget.dart';
 import '../widgets/scaffold2.dart';
 import 'gifts_screen.dart';
 import 'guests_screen.dart';
@@ -34,37 +34,30 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(
                       height: 20 + MediaQuery.of(context).viewPadding.top,
                     ),
-                    Row(
-                      children: [
-                        SizedBox(width: 20),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(44),
-                          child: Image.file(
-                            File(state is BottomInitial ? state.image : ''),
-                            height: 44,
-                            width: 44,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
+                    BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, state) {
+                        if (state is ProfileLoaded) {
+                          return Row(
+                            children: [
+                              SizedBox(width: 20),
+                              ImageWidget(
+                                image: state.image,
                                 height: 44,
-                                width: 44,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xffD9D9D9),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                'Hello, ${state.name.isEmpty ? 'User' : state.name}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontFamily: 'w800',
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Hello, ${state is BottomInitial ? state.name : ''}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontFamily: 'w800',
-                          ),
-                        ),
-                      ],
+                              ),
+                            ],
+                          );
+                        }
+                        return Container();
+                      },
                     ),
                   ],
                 );

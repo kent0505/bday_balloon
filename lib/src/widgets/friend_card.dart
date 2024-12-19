@@ -3,17 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../blocs/gift/gift_bloc.dart';
-import '../database/gift.dart';
-import '../screens/gift_add_screen.dart';
+import '../blocs/friend/friend_bloc.dart';
+import '../database/friend.dart';
+import '../screens/friend_add_screen.dart';
+import '../utils.dart';
 import 'btn.dart';
 import 'del_dialog.dart';
 import 'image_widget.dart';
 
-class GiftCard extends StatelessWidget {
-  const GiftCard({super.key, required this.gift});
+class FriendCard extends StatelessWidget {
+  const FriendCard({
+    super.key,
+    required this.friend,
+  });
 
-  final Gift gift;
+  final Friend friend;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +28,14 @@ class GiftCard extends StatelessWidget {
         extentRatio: 0.3,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 30),
             child: Btn(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return GiftAddScreen(gift: gift);
+                      return FriendAddScreen(friend: friend);
                     },
                   ),
                 );
@@ -41,16 +45,18 @@ class GiftCard extends StatelessWidget {
           ),
           SizedBox(width: 15),
           Padding(
-            padding: const EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 30),
             child: Btn(
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) {
                     return DelDialog(
-                      title: 'Delete Gift?',
+                      title: 'Delete Friend?',
                       onYes: () {
-                        context.read<GiftBloc>().add(GiftDelete(gift: gift));
+                        context
+                            .read<FriendBloc>()
+                            .add(FriendDelete(friend: friend));
                       },
                     );
                   },
@@ -64,7 +70,7 @@ class GiftCard extends StatelessWidget {
       child: Container(
         height: 82,
         margin: EdgeInsets.only(
-          bottom: 20,
+          bottom: 30,
           left: 20,
           right: 20,
         ),
@@ -86,13 +92,15 @@ class GiftCard extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: 6),
-            ImageWidget(image: gift.image),
+            ImageWidget(image: friend.image),
+            SizedBox(width: 14),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    gift.title,
+                    '${friend.name} ${friend.surname}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -101,29 +109,50 @@ class GiftCard extends StatelessWidget {
                       fontFamily: 'w800',
                     ),
                   ),
-                  SizedBox(height: 2),
+                  SizedBox(height: 4),
                   Text(
-                    gift.details.join(', '),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    friend.birth,
                     style: TextStyle(
                       color: Color(0xff1E1E1E),
                       fontSize: 10,
                       fontFamily: 'w800',
                     ),
                   ),
-                  SizedBox(height: 2),
+                  SizedBox(height: 4),
                   Text(
-                    'Price: \$${gift.price}',
+                    formatTimestamp(friend.id),
                     style: TextStyle(
-                      color: Color(0xffDD0474),
-                      fontSize: 15,
+                      color: Colors.white,
+                      fontSize: 10,
                       fontFamily: 'w800',
                     ),
                   ),
                 ],
               ),
             ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Turns:',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontFamily: 'w800',
+                  ),
+                ),
+                Text(
+                  calculateAge(friend.birth),
+                  style: TextStyle(
+                    color: Color(0xffDD0474),
+                    fontSize: 42,
+                    fontFamily: 'w800',
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(width: 20),
           ],
         ),
       ),

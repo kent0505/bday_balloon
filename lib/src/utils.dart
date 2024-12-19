@@ -9,10 +9,38 @@ String dateToString(DateTime date) => DateFormat('MMM dd yyyy').format(date);
 
 DateTime stringToDate(String date) {
   try {
-    return DateFormat('dd.MM.yyyy').parse(date);
+    return DateFormat('MMM dd yyyy').parse(date);
   } catch (_) {
     return DateTime.now();
   }
+}
+
+String formatTimestamp(int timestamp) {
+  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+  DateTime today = DateTime.now();
+  DateTime yesterday = today.subtract(Duration(days: 1));
+  if (date.year == today.year &&
+      date.month == today.month &&
+      date.day == today.day) {
+    return "Today";
+  } else if (date.year == yesterday.year &&
+      date.month == yesterday.month &&
+      date.day == yesterday.day) {
+    return "Yesterday";
+  } else {
+    return DateFormat('MMM dd, yyyy').format(date);
+  }
+}
+
+String calculateAge(String birth) {
+  DateTime birthDate = stringToDate(birth);
+  DateTime today = DateTime.now();
+  int age = today.year - birthDate.year;
+  if (today.month < birthDate.month ||
+      (today.month == birthDate.month && today.day < birthDate.day)) {
+    age--;
+  }
+  return age.toString();
 }
 
 void logger(Object message) => developer.log(message.toString());

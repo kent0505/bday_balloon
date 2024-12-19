@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../blocs/friend/friend_bloc.dart';
 import '../widgets/btn.dart';
+import '../widgets/friend_card.dart';
 import '../widgets/page_title.dart';
 import '../widgets/scaffold2.dart';
 import 'friend_add_screen.dart';
@@ -20,10 +23,18 @@ class FriendsScreen extends StatelessWidget {
                 title: 'My friends',
                 back: true,
               ),
-              Expanded(
-                child: ListView(
-                  children: [],
-                ),
+              BlocBuilder<FriendBloc, FriendState>(
+                builder: (context, state) => state is FriendLoaded
+                    ? Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          itemCount: state.friends.length,
+                          itemBuilder: (context, index) {
+                            return FriendCard(friend: state.friends[index]);
+                          },
+                        ),
+                      )
+                    : Container(),
               ),
             ],
           ),

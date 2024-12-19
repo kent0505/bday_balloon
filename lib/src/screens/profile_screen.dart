@@ -129,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Field(
                         controller: controller2,
-                        hintText: 'First Name',
+                        hintText: 'Name',
                         onChanged: onChanged,
                       ),
                       Container(
@@ -151,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       SizedBox(height: 10),
                       Field(
                         controller: controller4,
-                        hintText: 'Birth',
+                        hintText: 'Date of bith',
                         datePicker: true,
                         onChanged: onChanged,
                       ),

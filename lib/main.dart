@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'src/blocs/friend/friend_bloc.dart';
 import 'src/blocs/gift/gift_bloc.dart';
 import 'src/blocs/guest/guest_bloc.dart';
 import 'src/blocs/profile/profile_bloc.dart';
@@ -28,17 +29,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GiftBloc()..add(GiftGet())),
         BlocProvider(create: (context) => GuestBloc()),
         BlocProvider(create: (context) => ProfileBloc()..add(ProfileGet())),
+        BlocProvider(create: (context) => FriendBloc()..add(FriendGet())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          useMaterial3: false,
           dialogTheme: const DialogTheme(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
           ),
-          useMaterial3: false,
         ),
         home: const SplashScreen(),
       ),

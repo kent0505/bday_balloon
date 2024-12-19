@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../blocs/guest/guest_bloc.dart';
 import '../widgets/btn.dart';
+import '../widgets/guest_card.dart';
 import '../widgets/page_title.dart';
 import 'guest_add_screen.dart';
 
@@ -14,15 +17,39 @@ class GuestsScreen extends StatelessWidget {
       children: [
         Column(
           children: [
-            PageTitle(
-              title: 'Guests',
-              subtitle: '9 guests',
+            BlocBuilder<GuestBloc, GuestState>(
+              builder: (context, state) {
+                return PageTitle(
+                  title: 'Guests',
+                  subtitle:
+                      '${state is GuestLoaded ? state.guests.length : 0} guests',
+                );
+              },
             ),
             SizedBox(height: 10),
-            Expanded(
-              child: ListView(
-                children: [],
-              ),
+            BlocBuilder<GuestBloc, GuestState>(
+              builder: (context, state) => state is GuestLoaded
+                  ? Flexible(
+                      child: GridView.builder(
+                        padding: EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 20,
+                          bottom: 200,
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 1.8,
+                        ),
+                        itemCount: state.guests.length,
+                        itemBuilder: (context, index) {
+                          return GuestCard(guest: state.guests[index]);
+                        },
+                      ),
+                    )
+                  : Container(),
             ),
           ],
         ),

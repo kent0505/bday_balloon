@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GiftBloc()..add(GiftGet())),
-        BlocProvider(create: (context) => GuestBloc()),
+        BlocProvider(create: (context) => GuestBloc()..add(GuestGet())),
         BlocProvider(create: (context) => ProfileBloc()..add(ProfileGet())),
         BlocProvider(create: (context) => FriendBloc()..add(FriendGet())),
       ],

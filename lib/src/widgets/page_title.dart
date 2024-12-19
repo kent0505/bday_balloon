@@ -9,11 +9,13 @@ class PageTitle extends StatelessWidget {
     required this.title,
     this.subtitle = '',
     this.back = false,
+    this.onDelete,
   });
 
   final String title;
   final String subtitle;
   final bool back;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,17 @@ class PageTitle extends StatelessWidget {
                   ),
                 ),
               ),
-              if (back) SizedBox(width: 44),
+              if (back)
+                onDelete == null
+                    ? SizedBox(width: 44)
+                    : Btn(
+                        onPressed: onDelete,
+                        minSize: 44,
+                        child: SvgPicture.asset(
+                          'assets/delete.svg',
+                          height: 20,
+                        ),
+                      ),
               SizedBox(width: 20),
             ],
           ),

@@ -28,7 +28,7 @@ class FriendBloc extends Bloc<FriendEvent, FriendState> {
 
   void _add(FriendAdd event, Emitter<FriendState> emit) async {
     List<Friend> friends = await getFriends();
-    friends.add(event.friend);
+    friends.insert(0, event.friend);
     friends = await updateFriends(friends);
     emit(FriendLoaded(friends: friends));
   }

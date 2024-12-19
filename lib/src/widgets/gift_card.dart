@@ -85,7 +85,7 @@ class GiftCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SizedBox(width: 6),
+            SizedBox(width: 8),
             ImageWidget(image: gift.image),
             Expanded(
               child: Column(

@@ -205,7 +205,6 @@ class _GiftAddScreenState extends State<GiftAddScreen> {
                 ),
                 Container(
                   height: 102,
-                  margin: EdgeInsets.only(bottom: 38),
                   color: Color(0xff3CC8FF),
                   child: Field(
                     controller: controller4,

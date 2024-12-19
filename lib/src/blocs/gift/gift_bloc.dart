@@ -28,7 +28,7 @@ class GiftBloc extends Bloc<GiftEvent, GiftState> {
 
   void _add(GiftAdd event, Emitter<GiftState> emit) async {
     List<Gift> gifts = await getGifts();
-    gifts.add(event.gift);
+    gifts.insert(0, event.gift);
     gifts = await updateGifts(gifts);
     emit(GiftLoaded(gifts: gifts));
   }

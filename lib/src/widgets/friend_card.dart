@@ -91,7 +91,7 @@ class FriendCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SizedBox(width: 6),
+            SizedBox(width: 8),
             ImageWidget(image: friend.image),
             SizedBox(width: 14),
             Expanded(

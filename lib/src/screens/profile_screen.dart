@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../utils.dart';
@@ -10,6 +7,7 @@ import '../blocs/profile/profile_bloc.dart';
 import '../widgets/add_photo_button.dart';
 import '../widgets/button.dart';
 import '../widgets/field.dart';
+import '../widgets/image_widget.dart';
 import '../widgets/page_title.dart';
 import '../widgets/scaffold2.dart';
 
@@ -94,30 +92,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   back: true,
                 ),
                 SizedBox(height: 16),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(44),
-                  child: Image.file(
-                    File(controller1.text),
-                    height: 90,
-                    width: 90,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        height: 90,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 4,
-                            color: Colors.white,
-                          ),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset('assets/profile.svg'),
-                        ),
-                      );
-                    },
-                  ),
+                ImageWidget(
+                  image: controller1.text,
+                  height: 90,
+                  asset: 'profile',
                 ),
                 SizedBox(height: 10),
                 AddPhotoButton(onPressed: onPickImage),

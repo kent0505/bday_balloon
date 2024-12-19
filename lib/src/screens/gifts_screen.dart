@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/gift/gift_bloc.dart';
 import '../widgets/btn.dart';
+import '../widgets/gift_card.dart';
 import '../widgets/page_title.dart';
 import 'gift_add_screen.dart';
 
@@ -14,15 +17,28 @@ class GiftsScreen extends StatelessWidget {
       children: [
         Column(
           children: [
-            PageTitle(
-              title: 'Gifts',
-              subtitle: '5 gifts',
+            BlocBuilder<GiftBloc, GiftState>(
+              builder: (context, state) {
+                return PageTitle(
+                  title: 'Gifts',
+                  subtitle:
+                      '${state is GiftLoaded ? state.gifts.length : 0} gifts',
+                );
+              },
             ),
             SizedBox(height: 10),
-            Expanded(
-              child: ListView(
-                children: [],
-              ),
+            BlocBuilder<GiftBloc, GiftState>(
+              builder: (context, state) => state is GiftLoaded
+                  ? Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.only(top: 20, bottom: 200),
+                        itemCount: state.gifts.length,
+                        itemBuilder: (context, index) {
+                          return GiftCard(gift: state.gifts[index]);
+                        },
+                      ),
+                    )
+                  : Container(),
             ),
           ],
         ),

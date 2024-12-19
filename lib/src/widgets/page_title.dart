@@ -25,7 +25,7 @@ class PageTitle extends StatelessWidget {
         children: [
           Row(
             children: [
-              SizedBox(width: 30),
+              SizedBox(width: 20),
               if (back)
                 Btn(
                   onPressed: () {
@@ -47,7 +47,7 @@ class PageTitle extends StatelessWidget {
                 ),
               ),
               if (back) SizedBox(width: 44),
-              SizedBox(width: 30),
+              SizedBox(width: 20),
             ],
           ),
           Text(

@@ -1,62 +1,21 @@
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-import 'guest.dart';
+import 'gift.dart';
 
-class DB {
-  late Database _db;
+Future<void> initHive() async {
+  await Hive.initFlutter();
+  // await Hive.deleteBoxFromDisk('bday_balloon');
+  Hive.registerAdapter(GiftAdapter());
+}
 
-  Future<void> init() async {
-    try {
-      final dbPath = await getDatabasesPath();
-      final path = join(dbPath, 'bday_balloon.db');
-      _db = await openDatabase(
-        path,
-        version: 1,
-        onCreate: (Database db, int version) async {
-          await db.execute('''
-            CREATE TABLE guests (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              title TEXT
-            )
-          ''');
-        },
-      );
-    } on Object catch (error, stackTrace) {
-      Error.throwWithStackTrace(error, stackTrace);
-    }
-  }
+Future<List<Gift>> getGifts() async {
+  final box = await Hive.openBox('bday_balloon');
+  List data = box.get('gifts') ?? [];
+  return data.cast<Gift>();
+}
 
-  Future<List<Guest>> getGuests() async {
-    final List<Map<String, dynamic>> maps = await _db.query('guests');
-    return List.generate(maps.length, (index) => Guest.fromMap(maps[index]));
-  }
-
-  Future<List<Guest>> addGuest(Guest guest) async {
-    await _db.insert(
-      'guests',
-      guest.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-    return await getGuests();
-  }
-
-  Future<List<Guest>> editGuest(Guest guest) async {
-    await _db.update(
-      'guests',
-      guest.toMap(),
-      where: 'id = ?',
-      whereArgs: [guest.id],
-    );
-    return await getGuests();
-  }
-
-  Future<List<Guest>> deleteGuest(Guest guest) async {
-    await _db.delete(
-      'guests',
-      where: 'id = ?',
-      whereArgs: [guest.id],
-    );
-    return await getGuests();
-  }
+Future<List<Gift>> updateGifts(List<Gift> gifts) async {
+  final box = await Hive.openBox('bday_balloon');
+  box.put('gifts', gifts);
+  return await box.get('gifts');
 }
